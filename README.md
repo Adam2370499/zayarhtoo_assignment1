@@ -105,7 +105,7 @@ console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });
 
 ### Expected Console Output
 ```text
---- 1. Check Stream Access ---
+=== 1. CHECK STREAM ACCESS (PAYWALL VERIFICATION) ===
 {
   success: true,
   accessGranted: true,
@@ -115,10 +115,10 @@ console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });
 {
   success: true,
   accessGranted: false,
-  message: 'Access denied. "Solo Leveling" requires at least the \'Fan\' tier. Your current tier is \'Free\'.'
+  message: `Access denied. "Solo Leveling" requires at least the 'Fan' tier. Your current tier is 'Free'.`
 }
 
---- 2. Log Watch Progress ---
+=== 2. LOG WATCH PROGRESS ===
 {
   success: true,
   message: 'Updated progress for Zayar: Watched Episode 15 of "Shangri-La Frontier". (35 episodes remaining).',
@@ -128,8 +128,12 @@ console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });
     { animeId: 'ANI003', episodeWatched: 15 }
   ]
 }
+{
+  success: false,
+  message: 'Invalid episode number (99). "Solo Leveling" has 24 episodes.'
+}
 
---- 3. Update Subscription Tier ---
+=== 3. UPDATE SUBSCRIPTION TIER & BILLING ===
 {
   success: true,
   username: 'AlexTan',
@@ -138,22 +142,37 @@ console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });
   billingMonths: 12,
   discountApplied: '15% ($17.98)',
   totalAmountDue: '$101.90',
-  benefits: { monthlyPrice: 9.99, maxStreams: 4, adFree: true, offlineViewing: true }
+  benefits: {
+    monthlyPrice: 9.99,
+    maxStreams: 4,
+    adFree: true,
+    offlineViewing: true
+  }
 }
 
---- 4. Get Simulcast Schedule ---
+=== 4. GET WEEKLY SIMULCAST SCHEDULE ===
 {
   success: true,
   day: 'Sunday',
   genreFilter: 'Action',
   count: 2,
   shows: [
-    { id: 'ANI001', title: 'One Piece', genre: [ 'Action', 'Adventure', 'Fantasy' ], requiredTier: 'Free' },
-    { id: 'ANI003', title: 'Shangri-La Frontier', genre: [ 'Action', 'Sci-Fi', 'Gaming' ], requiredTier: 'Fan' }
+    {
+      id: 'ANI001',
+      title: 'One Piece',
+      genre: [ 'Action', 'Adventure', 'Fantasy' ],
+      requiredTier: 'Free'
+    },
+    {
+      id: 'ANI003',
+      title: 'Shangri-La Frontier',
+      genre: [ 'Action', 'Sci-Fi', 'Gaming' ],
+      requiredTier: 'Fan'
+    }
   ]
 }
 
---- 5. Rate Anime ---
+=== 5. RATE ANIME & RECALCULATE AVERAGE ===
 {
   success: true,
   message: 'SarahLim rated "Solo Leveling" 5/5 stars.',
@@ -162,7 +181,7 @@ console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });
   newAverageRating: 4.83
 }
 
---- 6. Get User Recommendations ---
+=== 6. GET PERSONALIZED RECOMMENDATIONS ===
 {
   success: true,
   username: 'Zayar',
