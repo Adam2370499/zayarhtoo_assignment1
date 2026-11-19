@@ -1,18 +1,3 @@
-# Assignment 1
-
-You will only need one file, ie, your node module, for this assignment.
-
-In this readme file, describe how to use your node module. It could be similar to **app.js** from Lab2, where you call some functions in your node module and display the output. Describe how to setup your node module, if any. Describe how to call the functions, what parameters required and so on.
-
-You can press **Ctrl+Shift+V** in this file in Visual Studio Code to see a live preview of the readme file.
-
-For some tips in formatting text in readme file, refer to https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
-
-# References
-Provide the references that you have used to support your assignment. 
-
-<!-- =================================================================================================== -->
-
 # EGL301 Assignment 1 - AnimeStreamManager Node Module
 
 ## 1. Overview
@@ -106,16 +91,16 @@ console.log("\n--- 3. Update Subscription Tier ---");
 console.log(streamManager.updateSubscriptionTier("USR02", "Mega Fan", 12));
 
 // 4. Get Weekly Simulcast Schedule
-console.log("\n--- 4. Get Simulcast Schedule ---");
-console.log(streamManager.getSimulcastSchedule("Sunday", "Action"));
+console.log("\n=== 4. GET WEEKLY SIMULCAST SCHEDULE ===");
+console.dir(streamManager.getSimulcastSchedule("Sunday", "Action"), { depth: null });
 
 // 5. Rate an Anime
 console.log("\n--- 5. Rate Anime ---");
 console.log(streamManager.rateAnime("USR03", "ANI002", 5));
 
 // 6. Get Personalized Recommendations
-console.log("\n--- 6. Get User Recommendations ---");
-console.log(streamManager.getRecommendationsForUser("USR01"));
+console.log("\n=== 6. GET PERSONALIZED RECOMMENDATIONS ===");
+console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });
 ```
 
 ### Expected Console Output
@@ -200,6 +185,7 @@ console.log(streamManager.getRecommendationsForUser("USR01"));
 In accordance with the EGL301 Scope of Use of AI guidelines, AI tools were used strictly for[cite: 1, 3]:
 - Generating ideas for the application concept and feature set[cite: 1].
 - Generating mock data and mock schema required for the node module (`subscriptionPlans`, `animeCatalog`, and `users` arrays)[cite: 1].
+- checking the codes that i wrote
 
 ---
 

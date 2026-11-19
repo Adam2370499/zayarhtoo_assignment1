@@ -12,10 +12,10 @@ console.log("\n=== 3. UPDATE SUBSCRIPTION TIER & BILLING ===");
 console.log(streamManager.updateSubscriptionTier("USR02", "Mega Fan", 12)); // Upgrade Free -> Mega Fan with 15% annual discount
 
 console.log("\n=== 4. GET WEEKLY SIMULCAST SCHEDULE ===");
-console.log(streamManager.getSimulcastSchedule("Sunday", "Action"));
+console.dir(streamManager.getSimulcastSchedule("Sunday", "Action"), { depth: null });
 
 console.log("\n=== 5. RATE ANIME & RECALCULATE AVERAGE ===");
 console.log(streamManager.rateAnime("USR03", "ANI002", 5));
 
 console.log("\n=== 6. GET PERSONALIZED RECOMMENDATIONS ===");
-console.log(streamManager.getRecommendationsForUser("USR01"));
+console.dir(streamManager.getRecommendationsForUser("USR01"), { depth: null });

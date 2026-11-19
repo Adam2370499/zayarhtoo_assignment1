@@ -1,14 +1,4 @@
-/**
- * EGL301 Assignment 1
- * Node Module: ZayarHtoo_AnimeStreamManager.js
- * Reference Web Application: Crunchyroll (https://www.crunchyroll.com)
- * Description: Manages anime streaming catalog, user subscription tiers, 
- * paywall access rights, watch history, and simulcast schedules.
- */
-
-// ==========================================
-// 1. MOCK DATABASE (In-Memory Arrays)
-// ==========================================
+// mock database (In-Memory Arrays)
 
 const subscriptionPlans = {
     "Free": { monthlyPrice: 0.00, maxStreams: 1, adFree: false, offlineViewing: false },
@@ -93,21 +83,15 @@ const users = [
     }
 ];
 
-// Helper mapping for tier hierarchy checks
 const tierRank = {
     "Free": 1,
     "Fan": 2,
     "Mega Fan": 3
 };
 
-// ==========================================
-// 2. CORE MODULE FUNCTIONS (6 Functions)
-// ==========================================
-
-/**
- * Function 1: Verify if a user's subscription tier grants access to a specific anime
- * (Simulates paywall access rights check)
- */
+//  Function 1: Verify if a user's subscription tier grants access to a specific anime
+//  (Simulates paywall access rights check)
+ 
 function checkStreamAccess(userId, animeId) {
     const user = users.find(u => u.userId === userId);
     const anime = animeCatalog.find(a => a.id === animeId);
@@ -134,10 +118,9 @@ function checkStreamAccess(userId, animeId) {
     }
 }
 
-/**
- * Function 2: Log watched episode progress for a user
- * (Validates episode bounds and updates or adds to watchHistory)
- */
+// Function 2: Log watched episode progress for a user
+// (Validates episode bounds and updates or adds to watchHistory)
+ 
 function logWatchProgress(userId, animeId, episodeNumber) {
     const user = users.find(u => u.userId === userId);
     const anime = animeCatalog.find(a => a.id === animeId);
@@ -173,10 +156,9 @@ function logWatchProgress(userId, animeId, episodeNumber) {
     };
 }
 
-/**
- * Function 3: Upgrade or change a user's subscription tier and calculate billing with promo discounts
- * (Handles subscription tiers and billing cycles)
- */
+//  Function 3: Upgrade or change a user's subscription tier and calculate billing with promo discounts
+//  (Handles subscription tiers and billing cycles)
+
 function updateSubscriptionTier(userId, newTier, billingMonths = 1) {
     const user = users.find(u => u.userId === userId);
     if (!user) return { success: false, message: `User ID ${userId} not found.` };
@@ -199,7 +181,7 @@ function updateSubscriptionTier(userId, newTier, billingMonths = 1) {
     let baseTotal = monthlyRate * billingMonths;
     let discountRate = 0;
 
-    // Apply realistic multi-month commitment discount (e.g., 15% off for 12-month annual plan)
+    // apply realistic multi-month commitment discount
     if (billingMonths >= 12) {
         discountRate = 0.15;
     } else if (billingMonths >= 6) {
@@ -221,10 +203,9 @@ function updateSubscriptionTier(userId, newTier, billingMonths = 1) {
     };
 }
 
-/**
- * Function 4: Retrieve the weekly simulcast schedule by release day or genre
- * (Helps users track weekly simulcast drops)
- */
+//  Function 4: Retrieve the weekly simulcast schedule by release day or genre
+//  (Helps users track weekly simulcast drops)
+ 
 function getSimulcastSchedule(dayOfWeek, genreFilter = null) {
     if (!dayOfWeek) {
         return { success: false, message: "Please specify a day of the week (e.g., 'Saturday', 'Sunday')." };
@@ -254,9 +235,8 @@ function getSimulcastSchedule(dayOfWeek, genreFilter = null) {
     };
 }
 
-/**
- * Function 5: Submit a user rating (1-5 stars) for an anime and compute its new average score
- */
+//  Function 5: Submit a user rating (1-5 stars) for an anime and compute its new average score
+ 
 function rateAnime(userId, animeId, ratingScore) {
     const user = users.find(u => u.userId === userId);
     const anime = animeCatalog.find(a => a.id === animeId);
@@ -281,16 +261,15 @@ function rateAnime(userId, animeId, ratingScore) {
     };
 }
 
-/**
- * Function 6: Generate personalized anime recommendations based on a user's watched genres
- */
+//  Function 6: Generate personalized anime recommendations based on a user's watched genres
+
 function getRecommendationsForUser(userId) {
     const user = users.find(u => u.userId === userId);
     if (!user) return { success: false, message: `User ID ${userId} not found.` };
 
     const watchedIds = user.watchHistory.map(h => h.animeId);
 
-    // Collect favorite genres from user's watch history
+    // collect favorite genres from user's watch history
     const favoriteGenres = new Set();
     watchedIds.forEach(id => {
         const anime = animeCatalog.find(a => a.id === id);
@@ -299,7 +278,7 @@ function getRecommendationsForUser(userId) {
         }
     });
 
-    // Find unwatched anime that match favorite genres (or top-rated if history is empty)
+    // find unwatched anime that match favorite genres (or top-rated if history is empty)
     let recommendations = animeCatalog.filter(a => !watchedIds.includes(a.id));
 
     if (favoriteGenres.size > 0) {
@@ -325,9 +304,6 @@ function getRecommendationsForUser(userId) {
     };
 }
 
-// ==========================================
-// 3. EXPORT MODULE
-// ==========================================
 module.exports = {
     checkStreamAccess,
     logWatchProgress,
